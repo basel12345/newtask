@@ -20,19 +20,23 @@
     <div class="row">
       <div class="col-md-6">
         <div class="form-group">
-          <label for="Email1">Email</label>
+          <label for="Email1">Email / Username</label>
           <input
-            type="email"
+            type="text"
             class="form-control"
             id="Email1"
-            placeholder="Email"
+            placeholder="Email / Username"
             name="email"
             [(ngModel)]="User.email"
             #email="ngModel"
             required
           />
           <div *ngIf="frm.submitted && email.errors?.required">
-            <div *ngIf="email.touched" class="alert alert-danger" role="alert">
+            <div
+              *ngIf="email.errors?.required"
+              class="alert alert-danger"
+              role="alert"
+            >
               يرجى ادخال البريد الالكتروني
             </div>
           </div>
@@ -49,15 +53,27 @@
             name="password"
             [(ngModel)]="User.password"
             #password="ngModel"
+            [ngClass]="{ 'is-invalid': frm.submitted && password.invalid }"
             required
+            minlength="8"
           />
-          <div *ngIf="frm.submitted && password.errors?.required">
+          <div
+            *ngIf="frm.submitted && password.invalid"
+            class="invalid-feedback "
+          >
             <div
-              *ngIf="password.touched"
               class="alert alert-danger"
               role="alert"
+              *ngIf="password.errors.required"
             >
-              يرجى ادخال الرقم السري
+              يجب ادخال الرقم السري
+            </div>
+            <div
+              class="alert alert-danger"
+              role="alert"
+              *ngIf="password.errors.minlength"
+            >
+              يجب ان لا يقل عن 8
             </div>
           </div>
         </div>

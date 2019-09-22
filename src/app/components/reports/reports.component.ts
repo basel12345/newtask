@@ -40,6 +40,7 @@ export class ReportsComponent implements OnInit {
       .paginationReports(this.login, p, this.perPage)
       .subscribe(res => {
         this.pagination = res;
+        // console.table()
       });
   }
 }

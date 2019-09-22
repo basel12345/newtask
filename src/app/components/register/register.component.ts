@@ -1,4 +1,5 @@
 import { Component, OnInit } from "@angular/core";
+import { Router } from "@angular/router";
 @Component({
   selector: "register-root",
   templateUrl: "./register.component.html"
@@ -14,7 +15,7 @@ export class RegisterComponent implements OnInit {
   genders = [{ name: "male", id: 1 }, { name: "famale", id: 2 }];
 
   imageUrl: string = "/assets/images/Flag_of_None.svg.png";
-  constructor() {}
+  constructor(private router: Router) {}
 
   ngOnInit() {}
 
@@ -29,6 +30,8 @@ export class RegisterComponent implements OnInit {
   }
 
   Submit(frm) {
-    console.log(this.User);
+    if (frm.vaild) {
+      this.router.navigate(["/users"]);
+    }
   }
 }

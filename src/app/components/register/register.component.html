@@ -33,7 +33,7 @@
           />
           <div *ngIf="frm.submitted && username.errors?.required">
             <div
-              *ngIf="username.touched"
+              *ngIf="username.errors?.required"
               class="alert alert-danger"
               role="alert"
             >
@@ -66,11 +66,20 @@
             name="email"
             [(ngModel)]="User.email"
             #email="ngModel"
+            [ngClass]="{ 'is-invalid': frm.submitted && email.invalid }"
             required
+            email
           />
-          <div *ngIf="frm.submitted && email.errors?.required">
-            <div *ngIf="email.touched" class="alert alert-danger" role="alert">
+          <div *ngIf="frm.submitted && email.invalid" class="invalid-feedback">
+            <div
+              class="alert alert-danger"
+              role="alert"
+              *ngIf="email.errors?.required"
+            >
               يرجى ادخال البريد الالكتروني
+            </div>
+            <div *ngIf="email.errors.email">
+              Email must be a valid email address
             </div>
           </div>
         </div>
@@ -91,7 +100,11 @@
             }}</option>
           </select>
           <div *ngIf="frm.submitted && gender.errors?.required">
-            <div *ngIf="gender.touched" class="alert alert-danger" role="alert">
+            <div
+              *ngIf="gender.errors?.required"
+              class="alert alert-danger"
+              role="alert"
+            >
               يرجى ادخال النوع
             </div>
           </div>
@@ -108,15 +121,27 @@
             name="password"
             [(ngModel)]="User.password"
             #password="ngModel"
+            [ngClass]="{ 'is-invalid': frm.submitted && password.invalid }"
             required
+            minlength="8"
           />
-          <div *ngIf="frm.submitted && password.errors?.required">
+          <div
+            *ngIf="frm.submitted && password.invalid"
+            class="invalid-feedback "
+          >
             <div
-              *ngIf="password.touched"
               class="alert alert-danger"
               role="alert"
+              *ngIf="password.errors.required"
             >
-              يرجى ادخال الرقم السري
+              يجب ادخال الرقم السري
+            </div>
+            <div
+              class="alert alert-danger"
+              role="alert"
+              *ngIf="password.errors.minlength"
+            >
+              يجب ان لا يقل عن 8
             </div>
           </div>
         </div>
