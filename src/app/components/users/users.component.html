@@ -1,0 +1,72 @@
+<div class="container">
+  <table class="table table-striped table-dark">
+    <thead>
+      <div class="col-md-12">
+        <div class="form-group">
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Search"
+            name="Search"
+            [(ngModel)]="User.q"
+          />
+        </div>
+        <button (click)="FilterUsers()" type="button" class="btn btn-info">
+          Search
+        </button>
+      </div>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">login</th>
+        <th scope="col">image</th>
+        <th scope="col">type</th>
+        <th scope="col">Last Seen Users</th>
+        <th scope="col">profile</th>
+        <th scope="col">github</th>
+        <th>favorites</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr
+        *ngFor="
+          let res of Users
+            | paginate: { itemsPerPage: perPage, currentPage: id }
+        "
+      >
+        <th scope="row">{{ res.id }}</th>
+        <td>{{ res.login }}</td>
+        <td><img style="width: 60px;" src="{{ res.avatar_url }}" alt="" /></td>
+        <td>{{ res.type }}</td>
+        <td>
+          <button (click)="LastSeenUsers()" type="button" class="btn btn-info">
+            Last Seen
+          </button>
+        </td>
+        <td>
+          <button
+            (click)="ViewProfile(res.login)"
+            type="button"
+            class="btn btn-primary"
+          >
+            profile
+          </button>
+        </td>
+        <td>
+          <a type="button" href="{{ res.html_url }}" class="btn btn-secondary"
+            >github</a
+          >
+        </td>
+        <td>
+          <button
+            (click)="ViewFavorites(res.login)"
+            type="button"
+            class="btn btn-primary"
+          >
+            favorites
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <pagination-controls (pageChange)="id = $event"></pagination-controls>
+</div>

@@ -1,0 +1,34 @@
+<div class="container">
+  <table class="table table-striped table-dark">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">login</th>
+        <th scope="col">image</th>
+        <th scope="col">type</th>
+        <th scope="col">profile</th>
+        <th scope="col">github</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr
+        *ngFor="
+          let res of UsersSeen
+            | paginate: { itemsPerPage: perPage, currentPage: id }
+        "
+      >
+        <th scope="row">{{ res.id }}</th>
+        <td>{{ res.login }}</td>
+        <td><img style="width: 60px;" src="{{ res.avatar_url }}" alt="" /></td>
+        <td>{{ res.type }}</td>
+        <td><button type="button" class="btn btn-primary">profile</button></td>
+        <td>
+          <a type="button" href="{{ res.html_url }}" class="btn btn-secondary"
+            >github</a
+          >
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <pagination-controls (pageChange)="id = $event"></pagination-controls>
+</div>

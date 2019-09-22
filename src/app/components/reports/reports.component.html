@@ -1,0 +1,69 @@
+<div class="container">
+  <h1>Pagination Reports</h1>
+  <table class="table table-dark">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">name</th>
+        <th scope="col">full name</th>
+        <th scope="col">Image</th>
+        <th scope="col">language</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr
+        *ngFor="
+          let res of pagination
+            | paginate: { itemsPerPage: perPage, currentPage: p };
+          let i = index
+        "
+      >
+        <th scope="row">{{ res.id }}</th>
+        <td>{{ res.name }}</td>
+        <td>{{ res.full_name }}</td>
+        <td>
+          <img
+            style="width: 68px;"
+            src="{{ res.owner.avatar_url }}"
+            alt="{{ res.name }}"
+          />
+        </td>
+        <td>{{ res.language }}</td>
+        <td>{{ page }}</td>
+      </tr>
+    </tbody>
+  </table>
+  <pagination-controls (pageChange)="p = $event"> </pagination-controls>
+</div>
+<!-- 
+    page = $event + 1
+ -->
+<div class="container">
+  <h1>Reports</h1>
+  <table class="table table-dark">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">name</th>
+        <th scope="col">full name</th>
+        <th scope="col">Image</th>
+        <th scope="col">language</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let res of Report">
+        <th scope="row">{{ res.id }}</th>
+        <td>{{ res.name }}</td>
+        <td>{{ res.full_name }}</td>
+        <td>
+          <img
+            style="width: 68px;"
+            src="{{ res.owner.avatar_url }}"
+            alt="{{ res.name }}"
+          />
+        </td>
+        <td>{{ res.language }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

@@ -1,0 +1,131 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/login" routerLinkActive="active"
+          >login</a
+        >
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/register" routerLinkActive="active"
+          >register</a
+        >
+      </li>
+    </ul>
+  </div>
+</nav>
+
+<div class="container">
+  <form #frm="ngForm" style="margin-top: 110px;">
+    <div class="row">
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="Username">Username</label>
+          <input
+            type="text"
+            class="form-control"
+            id="Username"
+            placeholder="Username"
+            name="username"
+            [(ngModel)]="User.username"
+            #username="ngModel"
+            required
+          />
+          <div *ngIf="frm.submitted && username.errors?.required">
+            <div
+              *ngIf="username.touched"
+              class="alert alert-danger"
+              role="alert"
+            >
+              يرجى ادخال الاسم
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group">
+          <img [src]="imageUrl" style="width: 150px;height: 150px;" alt="" />
+          <input
+            style="width: 80%;"
+            type="file"
+            (change)="handelFileInput($event.target.files)"
+            accept="image/"
+            id="exampleInputFile"
+            name="photo"
+          />
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="Email1">Email</label>
+          <input
+            type="email"
+            class="form-control"
+            id="Email1"
+            placeholder="Email"
+            name="email"
+            [(ngModel)]="User.email"
+            #email="ngModel"
+            required
+          />
+          <div *ngIf="frm.submitted && email.errors?.required">
+            <div *ngIf="email.touched" class="alert alert-danger" role="alert">
+              يرجى ادخال البريد الالكتروني
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="Password">gender</label>
+          <select
+            name=""
+            class="form-control"
+            [(ngModel)]="User.gender"
+            #gender="ngModel"
+            name="gender"
+            required
+          >
+            <option *ngFor="let res of genders" [value]="res.id">{{
+              res.name
+            }}</option>
+          </select>
+          <div *ngIf="frm.submitted && gender.errors?.required">
+            <div *ngIf="gender.touched" class="alert alert-danger" role="alert">
+              يرجى ادخال النوع
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="Password">Password</label>
+          <input
+            type="password"
+            class="form-control"
+            id="Password"
+            placeholder="Password"
+            name="password"
+            [(ngModel)]="User.password"
+            #password="ngModel"
+            required
+          />
+          <div *ngIf="frm.submitted && password.errors?.required">
+            <div
+              *ngIf="password.touched"
+              class="alert alert-danger"
+              role="alert"
+            >
+              يرجى ادخال الرقم السري
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-12">
+        <button type="submit" (click)="Submit(frm)" class="btn btn-primary">
+          Submit
+        </button>
+      </div>
+    </div>
+  </form>
+</div>

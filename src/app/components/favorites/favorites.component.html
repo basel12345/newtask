@@ -1,0 +1,21 @@
+<div class="container">
+  <div
+    class="ngx-dnd-container"
+    ngxDroppable
+    style="background-color:#343a40; color:white; cursor:pointer"
+  >
+    <div
+      *ngFor="let res of User"
+      style="padding: 20px"
+      class="ngx-dnd-item"
+      ngxDraggable
+    >
+      <div class="row">
+        <div class="col-md-6">{{ res.name }}</div>
+        <div class="col-md-6" style="float: right">
+          <button class="btn btn-danger" (click)="delete(res)">delete</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
